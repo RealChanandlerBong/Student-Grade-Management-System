@@ -22,4 +22,5 @@ public:
 	string Get_name() const;
 	string Get_info() const;
 	friend int operator != (const student &c1, const student &c2);
+	friend int operator == (const student &c1, const student &c2);
 };

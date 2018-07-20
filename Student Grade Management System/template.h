@@ -1,22 +1,24 @@
 #pragma once
 #include<string>
+#include<vector>
 using namespace std;
 template<typename T>
 int Exist(const vector<T> &x, const string &str)
 {
-	int i = 1;
+	int i = 0, n=x.size();
 	bool flag = 0;
-	while (x[i] != x.back())
+	string temp;
+	for (i = 0; i < n; i++)
 	{
-		i++;
-		if (str == x[i].Get_number())
+		temp = x[i].Get_number();
+		if (str == temp)
 		{
 			flag = 1;
 			break;
 		}
 	}
 	if (flag == 0)
-		return 0;
+		return -1;
 	else
 		return i;
 }
@@ -31,10 +33,9 @@ void Sync(const vector<T> &x, const string &str)
 	}
 	else
 	{
-		int i = 1;
-		while (x[i] != x.back())
+		int i = 0;
+		for (i = 0; i < x.size(); i++)
 		{
-			i++;
 			outf << x[i].Get_info() << endl;
 		}
 		outf.close();

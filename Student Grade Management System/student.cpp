@@ -57,3 +57,11 @@ int operator!=(const student & c1, const student & c2)
 	else
 		return 1;
 }
+
+int operator==(const student & c1, const student & c2)
+{
+	if (c1.student_id == c2.student_name&&c1.student_id == c2.student_id)
+		return 1;
+	else
+		return 0;
+}

@@ -57,11 +57,24 @@ string course::Get_info() const
 	return course_number + ',' + course_name + ',' + credit + ',' + teacher_name;
 }
 
+course course::operator=(const course & c)
+{
+	return course(c.course_number,c.course_name,credit,teacher_name);
+}
+
 int operator!=(const course & c1, const course & c2)
 {
-	if (c1.course_number == c2.course_number&&c1.course_name == c2.course_name
-		&&c1.credit == c2.credit&&c1.teacher_name == c2.teacher_name)
+	if (c1.Get_info()==c2.Get_info())
 		return 0;
 	else
 		return 1;
 }
+
+int operator==(const course & c1, const course & c2)
+{
+	if (c1.Get_info() == c2.Get_info())
+		return 1;
+	else
+		return 0;
+}
+

@@ -81,3 +81,11 @@ int operator !=(const performance & p1, const performance & p2)
 	else
 		return 1;
 }
+
+int operator==(const performance & p1, const performance & p2)
+{
+	if (p1.Get_info() == p2.Get_info())
+		return 1;
+	else
+		return 0;
+}

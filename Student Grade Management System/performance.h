@@ -23,4 +23,5 @@ public:
 	string Get_number() const;
 	string Get_info() const;
 	friend int operator !=(const performance &p1, const performance &p2);
+	friend int operator ==(const performance &p1, const performance &p2);
 };

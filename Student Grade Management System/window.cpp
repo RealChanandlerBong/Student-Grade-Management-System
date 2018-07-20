@@ -15,6 +15,7 @@ window::window(string choose)
 		menu[1] = "2. 修改信息";
 		menu[2] = "3. 查询信息";
 		menu[3] = "4. 删除信息";
+		menu[4] = "5. 退出";
 	}
 	else if (choose == "01")
 	{
@@ -59,6 +60,10 @@ window::window(string choose)
 	else if (choose == "013")
 	{
 		welcome = "********************录入成绩信息********************";
+		menu[0] = "1. 选择已有课程";
+		menu[1] = "2. 添加新的课程";
+		menu[2] = "3. 返回上一级菜单";
+		menu[3] = "4. 返回主菜单";
 	}
 	else if (choose == "0131")
 	{
@@ -92,6 +97,18 @@ window::window(string choose)
 	{
 		welcome = "********************查询成绩信息********************";
 	}
+	else if (choose == "041")
+	{
+		welcome = "********************删除课程信息********************";
+	}
+	else if (choose == "042")
+	{
+		welcome = "********************删除学生信息********************";
+	}
+	else if (choose == "043")
+	{
+		welcome = "********************删除成绩信息********************";
+	}
 }
 
 
@@ -102,7 +119,7 @@ window::~window()
 void window::Display()
 {
 	std::cout << welcome << endl << endl;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 		if (menu[i] != "\0")
 			std::cout << menu[i] << endl;
 }

@@ -7,7 +7,7 @@
 using namespace std;
 class course : virtual public base
 {
-protected:
+private:
 	string course_number, course_name, credit, teacher_name;
 public:
 	course();
@@ -20,5 +20,7 @@ public:
 	string Get_name() const;
 	string Get_info() const;
 	friend int operator != (const course &c1, const course &c2);
+	friend int operator == (const course &c1, const course &c2);
+	course operator = (const course &c);
 	friend class performance;
 };

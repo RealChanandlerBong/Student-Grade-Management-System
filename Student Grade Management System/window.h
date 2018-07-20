@@ -6,7 +6,7 @@ class window
 {
 protected:
 	string welcome;
-	string menu[4];
+	string menu[5];
 public:
 	window();
 	window(string choose);
