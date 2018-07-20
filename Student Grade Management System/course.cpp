@@ -59,7 +59,7 @@ string course::Get_info() const
 
 course course::operator=(const course & c)
 {
-	return course(c.course_number,c.course_name,credit,teacher_name);
+	return course(c);
 }
 
 int operator!=(const course & c1, const course & c2)

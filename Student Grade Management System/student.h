@@ -21,6 +21,7 @@ public:
 	string Get_number() const;
 	string Get_name() const;
 	string Get_info() const;
+	student operator =(const student &s);
 	friend int operator != (const student &c1, const student &c2);
 	friend int operator == (const student &c1, const student &c2);
 };

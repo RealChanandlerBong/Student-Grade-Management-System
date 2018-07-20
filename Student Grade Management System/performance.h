@@ -22,6 +22,7 @@ public:
 	void Display() const;
 	string Get_number() const;
 	string Get_info() const;
+	performance operator =(const performance &p1);
 	friend int operator !=(const performance &p1, const performance &p2);
 	friend int operator ==(const performance &p1, const performance &p2);
 };
