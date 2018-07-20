@@ -116,6 +116,7 @@ int main()
 		std::cout << "请输入学分："; std::cin >> credit;
 		std::cout << "请输入教师姓名："; std::cin >> teacher_name;
 		cour.push_back(course(course_num, course_name, credit, teacher_name));
+		Sync(cour, "course.txt");
 	}
 	else if (choose == "012")
 	{
@@ -123,6 +124,7 @@ int main()
 		std::cout << "请输入学号："; std::cin >> student_id;
 		std::cout << "请输入学生姓名："; std::cin >> student_name;
 		stu.push_back(student(student_id, student_name));
+		Sync(stu, "student.txt");
 	}
 	else if (choose == "0131")
 	{
@@ -132,7 +134,7 @@ int main()
 		{
 			std::string course_number;
 			std::cout << "请输入课程序号："; std::cin >> course_number;
-			i = Exsit(cour, course_number);
+			i = Exist(cour, course_number);
 			if (i == 0)
 				cout << "Sorry, cannot find course '" << course_number << "'. Please input again." << endl;
 			else
@@ -146,6 +148,9 @@ int main()
 		std::cout << "请输入学生成绩：";
 		std::cin >> score;
 		per.push_back(performance(cour[i], stu_id, stu_name, score));
+		Sync(cour, "course.txt");
+		Sync(stu, "student.txt");
+		Sync(per, "performance.txt");
 	}
 	else if (choose == "0132")
 	{
@@ -162,6 +167,9 @@ int main()
 		cour.push_back(*cp);
 		per.push_back(performance(*cp, stu_id, stu_name, score));
 		delete cp;
+		Sync(cour, "course.txt");
+		Sync(stu, "student.txt");
+		Sync(per, "performance.txt");
 	}
 	else if (choose == "021")
 	{
@@ -172,7 +180,7 @@ int main()
 		{
 			std::cout << "请输入要修改的课程序号：";
 			std::cin >> old_number;
-			i = Exsit(cour, old_number);
+			i = Exist(cour, old_number);
 			if (i == 0)
 				cout << "Sorry, cannot find course '" << old_number << "'. Please input again." << endl;
 			else
@@ -193,13 +201,13 @@ int main()
 				else
 					flag = 0;
 			}
-
 		}
 		std::cout << "请输入新的课程序号："; std::cin >> new_number;
 		std::cout << "请输入新的课程名："; std::cin >> new_courseName;
 		std::cout << "请输入新的学分："; std::cin >> new_credit;
 		std::cout << "请输入新的开课教师："; std::cin >> new_teacherName;
 		cour[i].Set_course(new_number, new_courseName, new_credit, new_teacherName);
+		Sync(cour, "course.txt");
 	}
 	else if (choose == "022")
 	{
@@ -210,13 +218,13 @@ int main()
 		{
 			std::cout << "请输入要修改的学生学号：";
 			std::cin >> old_id;
-			i = Exsit(stu, old_id);
+			i = Exist(stu, old_id);
 			if (i == 0)
 				cout << "Sorry, cannot find student '" << old_id << "'. Please input again." << endl;
 			else
 			{
 				flag = 1;
-				std::cout << "提示：你将要修改学生 '" << old_id << ": " << stu[i].Get_name() << "'的信息，确定？[Y/N]";
+				std::cout << "提示：你将要修改学生 '" << old_id << ": " << stu[i].Get_name() << "'的信息，是否确定？[Y/N]";
 				char c;
 				std::cin >> c;
 				while ((c != 'y'&&c != 'Y'&&c != 'n'&&c != 'N') || cin.fail())
@@ -235,6 +243,7 @@ int main()
 		std::cout << "请输入新的学号："; std::cin >> new_id;
 		std::cout << "请输入新的学生姓名："; std::cin >> new_name;
 		stu[i].Set_student(new_id, new_name);
+		Sync(stu, "student.txt");
 	}
 	else if (choose == "023")
 	{
@@ -245,7 +254,7 @@ int main()
 		{
 			std::cout << "请输入课程序号：";
 			std::cin >> course_number;
-			i = Exsit(cour, course_number);
+			i = Exist(cour, course_number);
 			if (i == 0)
 				cout << "Sorry, cannot find course '" << course_number << "'. Please input again." << endl;
 			else
@@ -256,21 +265,70 @@ int main()
 		{
 			std::cout << "请输入学生学号：";
 			std::cin >> student_id;
-			i = Exsit(stu, student_id);
+			i = Exist(stu, student_id);
 			if (i == 0)
 				cout << "Sorry, cannot find student '" << student_id << "'. Please input again." << endl;
 			else
 				flag = 1;
 		}
 		flag = 0;
-		while (flag == 0)
-		{
-			std::cout << "请输入新成绩：";
-			std::cin >> new_score;
-
-
-
-		}
-		system("pause");
-		return 0;
+		std::cout << "请输入新成绩：";
+		std::cin >> new_score;
+		per[Exist(per, course_number + ',' + student_id)].Set(new_score);
+		Sync(per, "performance.txt");
 	}
+	else if (choose == "031")
+	{
+		int i = 0;
+		while(i==0)
+		{ 
+			std::string course_number;
+			std::cout << "请输入课程序号：";
+			std::cin >> course_number;
+			i = Exist(cour, course_number);
+			if(i==0)
+				std::cout << "Sorry, cannot find course '" << course_number << "'. Please try again." << endl;
+		}
+		cour[i].Display();
+	}
+	else if (choose == "032")
+	{
+		int i = 0;
+		while (i == 0)
+		{
+			std::string stu_id;
+			std::cout << "请输入学号：";
+			std::cin >> stu_id;
+			i = Exist(cour, stu_id);
+			if (i == 0)
+				std::cout << "Sorry, cannot find course '" << stu_id << "'. Please try again." << endl;
+		}
+		stu[i].Display();
+	}
+	else if (choose == "033")
+	{
+		int i = 0;
+		while (i == 0)
+		{
+			std::string course_number, stu_id;
+			std::cout << "请输入课程序号：";
+			std::cin >> course_number;
+			i = Exist(cour, course_number);
+			if (i == 0)
+				std::cout << "Sorry, cannot find course '" << course_number << "'. Please try again." << endl;
+		}
+		int j = 0;
+		while (j == 0)
+		{
+			std::string stu_id;
+			std::cout << "请输入学号：";
+			std::cin >> stu_id;
+			j = Exist(cour, stu_id);
+			if (j == 0)
+				std::cout << "Sorry, cannot find course '" << stu_id << "'. Please try again." << endl;
+		}
+
+	}
+	system("pause");
+	return 0;
+}

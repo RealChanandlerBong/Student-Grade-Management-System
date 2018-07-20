@@ -27,6 +27,7 @@ string Get_grade(string score)
 	else
 		return "F";
 }
+
 string Get_gp(string score)
 {
 	if ((score >= "95"&&score <= "99") || score == "95.5" || score == "96.5" || score == "97.5" || score == "98.5" || score == "99.5" || score == "100")

@@ -2,7 +2,7 @@
 #include<string>
 using namespace std;
 template<typename T>
-int Exsit(const vector<T> &x, const string &str)
+int Exist(const vector<T> &x, const string &str)
 {
 	int i = 1;
 	bool flag = 0;
@@ -19,4 +19,24 @@ int Exsit(const vector<T> &x, const string &str)
 		return 0;
 	else
 		return i;
-}#pragma once
+}
+
+template<typename T>
+void Sync(const vector<T> &x, const string &str)
+{
+	ofstream outf(str, ios::trunc);
+	if (outf.fail())
+	{
+		cout << "Error: cannot open file '" << str << "'. Please try again." << endl;
+	}
+	else
+	{
+		int i = 1;
+		while (x[i] != x.back())
+		{
+			i++;
+			outf << x[i].Get_info() << endl;
+		}
+		outf.close();
+	}
+}
