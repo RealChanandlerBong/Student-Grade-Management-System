@@ -13,7 +13,6 @@
 using namespace std;
 int main()
 {
-	/*vector<window>win(18);*/
 	vector<course>cour;
 	vector<student>stu;
 	vector<performance>per;

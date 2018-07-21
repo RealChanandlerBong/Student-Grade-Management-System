@@ -23,7 +23,7 @@ student::~student()
 
 }
 
-void student::Set_student(const string & name, const string & id)
+void student::Set_student(const string & id, const string & name)
 {
 	student_id = id;
 	student_name = name;

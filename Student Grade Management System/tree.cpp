@@ -324,37 +324,58 @@ void f_021(vector<course> &cour, vector <student> &stu, vector <performance> &pe
 	std::string old_number, new_number, new_courseName, new_credit, new_teacherName;
 	int i = 1;
 	bool flag = 0;
-	while (flag == 0)
+	bool flag1 = 0;
+	while (flag1 == 0)
 	{
-		std::cout << "请输入要修改的课程序号：";
-		std::cin >> old_number;
-		i = Exist(cour, old_number);
-		if (i < 0)
-			cout << "Sorry, cannot find course '" << old_number << "'. Please input again." << endl;
-		else
+		while (flag == 0)
 		{
-			flag = 1;
-			std::cout << "提示：你将要修改课程 '" << old_number << ": " << cour[i].Get_name() << "'的信息，是否确定？[Y/N]";
-			char c;
-			std::cin >> c;
-			while ((c != 'y'&&c != 'Y'&&c != 'n'&&c != 'N') || cin.fail())
+			std::cout <<endl<< "请输入要修改的课程序号：";
+			std::cin >> old_number;
+			i = Exist(cour, old_number);
+			if (i < 0)
+				cout << "Sorry, cannot find course '" << old_number << "'. Please input again." << endl;
+			else
 			{
-				std::cout << "Try again! [Y/N]" << endl;
+				flag = 1;
+				std::cout << "提示：你将要修改课程 '" << old_number << ": " << cour[i].Get_name() << "'的信息，是否确定？[Y/N]";
+				char c;
+				std::cin >> c;
+				while ((c != 'y'&&c != 'Y'&&c != 'n'&&c != 'N') || std::cin.fail())
+				{
+					std::cout << "Try again! [Y/N]" << endl;
+					std::cin.clear();
+					std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					std::cin >> c;
+				}
+				if (c == 'y' || c == 'Y')
+					break;
+				else
+					flag = 0;
+			}
+		}
+		if (flag == 1)
+		{
+			std::cout << "请输入新的课程序号："; std::cin >> new_number;
+			std::cout << "请输入新的课程名："; std::cin >> new_courseName;
+			std::cout << "请输入新的学分："; std::cin >> new_credit;
+			std::cout << "请输入新的开课教师："; std::cin >> new_teacherName;
+			cour[i].Set_course(new_number, new_courseName, new_credit, new_teacherName);
+			std::string temp;
+			std::cout << "提示：修改成功！是否继续修改？[Y/N]";
+			std::cin >> temp;
+			while (std::cin.fail() || (temp != "y"&&temp != "Y"&&temp != "n"&&temp != "N"))
+			{
+				std::cout << "Try again! " << endl;
 				std::cin.clear();
 				std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				std::cin >> c;
+				std::cin >> temp;
 			}
-			if (c == 'y' || c == 'Y')
-				break;
-			else
+			if (temp == "y" || temp == "Y")
 				flag = 0;
+			else
+				break;
 		}
 	}
-	std::cout << "请输入新的课程序号："; std::cin >> new_number;
-	std::cout << "请输入新的课程名："; std::cin >> new_courseName;
-	std::cout << "请输入新的学分："; std::cin >> new_credit;
-	std::cout << "请输入新的开课教师："; std::cin >> new_teacherName;
-	cour[i].Set_course(new_number, new_courseName, new_credit, new_teacherName);
 	Sync(cour, "course.txt");
 	returnMenu(cour, stu, per, choose);
 }
@@ -362,36 +383,71 @@ void f_022(vector<course> &cour, vector <student> &stu, vector <performance> &pe
 {
 	std::string old_id, new_id, new_name;
 	int i;
-	bool flag = 0; //用于判断是否继续输入
-	while (flag != 1)
+	bool flag = 0; //用于判断是否修改
+	bool flag1 = 0;//用于判断修改成功后是否继续修改
+	while (flag1 == 0)
 	{
-		std::cout << "请输入要修改的学生学号：";
-		std::cin >> old_id;
-		i = Exist(stu, old_id);
-		if (i < 0)
-			cout << "Sorry, cannot find student '" << old_id << "'. Please input again." << endl;
-		else
+		while (flag == 0)
 		{
-			flag = 1;
-			std::cout << "提示：你将要修改学生 '" << old_id << ": " << stu[i].Get_name() << "'的信息，是否确定？[Y/N]";
-			char c;
-			std::cin >> c;
-			while ((c != 'y'&&c != 'Y'&&c != 'n'&&c != 'N') || cin.fail())
+			std::cout << "请输入要修改的学生学号：";
+			std::cin >> old_id;
+			i = Exist(stu, old_id);
+			if (i < 0)
+				cout << "Sorry, cannot find student '" << old_id << "'. Please input again." << endl;
+			else
 			{
-				std::cout << "Try again! [Y/N]" << endl;
+				flag = 1;
+				std::cout << "提示：你将要修改学生 '" << old_id << ": " << stu[i].Get_name() << "'的信息，是否确定？[Y/N]";
+				char c;
+				std::cin >> c;
+				while ((c != 'y'&&c != 'Y'&&c != 'n'&&c != 'N') || std::cin.fail())
+				{
+					std::cout << "Try again! [Y/N]" << endl;
+					std::cin.clear();
+					std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					std::cin >> c;
+				}
+				if (c == 'y' || c == 'Y')
+					flag = 1;
+				else
+				{
+					flag = 0;
+					std::string temp;
+					std::cout << "是否退出修改，返回主菜单？[Y /N]";
+					std::cin >> temp;
+					while (std::cin.fail() || (temp != "y"&&temp != "Y"&&temp != "n"&&temp != "N"))
+					{
+						std::cout << "Try again! " << endl;
+						std::cin.clear();
+						std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						std::cin >> temp;
+					}
+					if (temp == "y" || temp == "Y")
+						break;
+				}
+			}
+		}
+		if (flag == 1)
+		{
+			std::cout << "请输入新的学号："; std::cin >> new_id;
+			std::cout << "请输入新的学生姓名："; std::cin >> new_name;
+			stu[i].Set_student(new_id, new_name);
+			std::string temp;
+			std::cout << endl<<"提示：修改成功！是否继续修改？[Y/N]";
+			std::cin >> temp;
+			while (std::cin.fail() || (temp != "y"&&temp != "Y"&&temp != "n"&&temp != "N"))
+			{
+				std::cout << "Try again! " << endl;
 				std::cin.clear();
 				std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				std::cin >> c;
+				std::cin >> temp;
 			}
-			if (c == 'y' || c == 'Y')
-				break;
+			if (temp == "n" || temp == "N")
+				flag1 = 1;
 			else
 				flag = 0;
 		}
 	}
-	std::cout << "请输入新的学号："; std::cin >> new_id;
-	std::cout << "请输入新的学生姓名："; std::cin >> new_name;
-	stu[i].Set_student(new_id, new_name);
 	Sync(stu, "student.txt");
 	returnMenu(cour, stu, per, choose);
 }
@@ -431,31 +487,67 @@ void f_023(vector<course> &cour, vector <student> &stu, vector <performance> &pe
 void f_031(vector<course> &cour, vector <student> &stu, vector <performance> &per, std::string &choose)
 {
 	int i = -1;
-	while (i < 0)
+	bool flag = 1;
+	while (flag == 1)
 	{
-		std::string course_number;
-		std::cout << "请输入课程序号：";
-		std::cin >> course_number;
-		i = Exist(cour, course_number);
-		if (i < 0)
-			std::cout << "Sorry, cannot find course '" << course_number << "'. Please try again." << endl;
+		while (i < 0)
+		{
+			std::string course_number;
+			std::cout << "请输入课程序号：";
+			std::cin >> course_number;
+			i = Exist(cour, course_number);
+			if (i < 0)
+				std::cout << "Sorry, cannot find course '" << course_number << "'. Please try again." << endl;
+		}
+		cour[i].Display();
+		std::string temp;
+		std::cout << endl << "是否继续查询？[Y/N]";
+		std::cin >> temp;
+		while (std::cin.fail() || (temp != "y"&&temp != "Y"&&temp != "n"&&temp != "N"))
+		{
+			std::cout << "Try again! " << endl;
+			std::cin.clear();
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cin >> temp;
+		}
+		if (temp == "n" || temp == "N")
+			flag = 0;
+		else
+			i = -1;
 	}
-	cour[i].Display();
 	returnMenu(cour, stu, per, choose);
 }
 void f_032(vector<course> &cour, vector <student> &stu, vector <performance> &per, std::string &choose)
 {
 	int i = -1;
-	while (i < 0)
+	bool flag = 1;
+	while (flag == 1)
 	{
-		std::string stu_id;
-		std::cout << "请输入学号：";
-		std::cin >> stu_id;
-		i = Exist(stu, stu_id);
-		if (i < 0)
-			std::cout << "Sorry, cannot find course '" << stu_id << "'. Please try again." << endl;
+		while (i < 0)
+		{
+			std::string stu_id;
+			std::cout << "请输入学号：";
+			std::cin >> stu_id;
+			i = Exist(stu, stu_id);
+			if (i < 0)
+				std::cout << "Sorry, cannot find student '" << stu_id << "'. Please try again." << endl;
+		}
+		stu[i].Display();
+		std::string temp;
+		std::cout << endl << "是否继续查询？[Y/N]";
+		std::cin >> temp;
+		while (std::cin.fail() || (temp != "y"&&temp != "Y"&&temp != "n"&&temp != "N"))
+		{
+			std::cout << "Try again! " << endl;
+			std::cin.clear();
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cin >> temp;
+		}
+		if (temp == "n" || temp == "N")
+			flag = 0;
+		else
+			i = -1;
 	}
-	stu[i].Display();
 	returnMenu(cour, stu, per, choose);
 }
 void f_033(vector<course> &cour, vector <student> &stu, vector <performance> &per, std::string &choose)
