@@ -121,6 +121,7 @@
     <ClInclude Include="performance.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="template.h" />
+    <ClInclude Include="tree.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +131,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="performance.cpp" />
     <ClCompile Include="student.cpp" />
+    <ClCompile Include="tree.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
